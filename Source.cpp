@@ -11,9 +11,12 @@ float fPlayerA = 0.0f;
 int nMapHeight = 16;
 int nMapWidth = 16;
 
-int main() {
-	//create screen buffer//
-    wchar_t *screen = new wchar_t[nScreenWidth*nScreenHeight];
+float fFOV = 3.14159 / 4.0;
+
+int main()
+{
+    //create screen buffer//
+    wchar_t *screen = new wchar_t[nScreenWidth * nScreenHeight];
     HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
     SetConsoleActiveScreenBuffer(hConsole);
     DWORD dwBytesWritten = 0;
@@ -40,13 +43,14 @@ int main() {
     //game loop//
     while (1)
     {
-        for(int x=0; x < nScreenWidth; x++);
+        for (int x = 0; x < nScreenWidth; x++)
+            
         {
+            float fRayAngle = (fPlayerA - fFOV / 2.0f) + ((float) x / (float)nScreenWidth) * fFOV;
+        }
 
-        };
-
-    screen[nScreenWidth * nScreenHeight - 1] = '\0';
-    WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
-    };
-	return 0;
-};
+        screen[nScreenWidth * nScreenHeight - 1] = '\0';
+        WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, {0, 0}, &dwBytesWritten);
+    }
+    return 0;
+}
